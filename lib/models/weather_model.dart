@@ -1,4 +1,6 @@
-class Weather {
+import 'package:equatable/equatable.dart';
+
+class Weather extends Equatable {
   Weather({
     this.product,
     this.init,
@@ -21,6 +23,9 @@ class Weather {
         "init": init,
         "dataseries": List<dynamic>.from(dataseries.map((x) => x.toJson())),
       };
+  @override
+  // TODO: implement props
+  List<Object> get props => [product, init, dataseries];
 }
 
 class Datasery {
@@ -70,6 +75,20 @@ class Datasery {
         "temp2m": temp2M,
         "prec_type": precTypeValues.reverse[precType],
       };
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [
+        timepoint,
+        cloudcover,
+        seeing,
+        transparency,
+        liftedIndex,
+        rh2M,
+        wind10M,
+        temp2M,
+        precType,
+      ];
 }
 
 enum PrecType { NONE }

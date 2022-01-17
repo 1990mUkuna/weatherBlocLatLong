@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:weather_bloc_lat_long/models/weather_model.dart';
- 
 
 class WeatherRepo {
+  final http.Client httpClient;
+
+  WeatherRepo({@required this.httpClient}) : assert(httpClient != null);
   Future<List<Datasery>> getDatasery(String long, lat, unit) async {
     //lat:23.1 long: 113.2
     final result = await http.Client().get(
