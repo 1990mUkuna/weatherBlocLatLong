@@ -1,34 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Weather extends Equatable {
-  Weather({
-    this.product,
-    this.init,
-    this.dataseries,
-  });
-
-  String product;
-  String init;
-  List<Datasery> dataseries;
-
-  factory Weather.fromJson(Map<String, dynamic> json) => Weather(
-        product: json["product"],
-        init: json["init"],
-        dataseries: List<Datasery>.from(
-            json["dataseries"].map((x) => Datasery.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "product": product,
-        "init": init,
-        "dataseries": List<dynamic>.from(dataseries.map((x) => x.toJson())),
-      };
-  @override
-  // TODO: implement props
-  List<Object> get props => [product, init, dataseries];
-}
-
-class Datasery {
+class Datasery extends Equatable {
   Datasery({
     this.timepoint,
     this.cloudcover,

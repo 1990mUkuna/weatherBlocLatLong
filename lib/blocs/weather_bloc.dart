@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:weather_bloc_lat_long/events/weather_event.dart';
-import 'package:weather_bloc_lat_long/states/weather_state.dart';
+import 'package:weather_bloc_lat_long/blocs/weather_event.dart';
+import 'package:weather_bloc_lat_long/blocs/weather_state.dart';
 import 'package:weather_bloc_lat_long/models/weather_model.dart';
 import 'package:weather_bloc_lat_long/repository/weather_repository.dart';
 
