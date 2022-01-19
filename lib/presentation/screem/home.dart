@@ -63,7 +63,9 @@ class _HomeState extends State<Home> {
                       }, builder: (context, weatherState) {
                         if (weatherState is WeatherLoadingState) {
                           return const Center(
-                              child: CircularProgressIndicator());
+                              child: CircularProgressIndicator(
+                            color: Color(0xFF010035),
+                          ));
                         }
                         if (weatherState is WeatherSuccesState) {
                           final weather = weatherState.weatherDatasery;
