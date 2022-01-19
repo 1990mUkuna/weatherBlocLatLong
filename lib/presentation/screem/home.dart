@@ -77,10 +77,83 @@ class _HomeState extends State<Home> {
                                       borderRadius: BorderRadius.circular(8),
                                       // ignore: avoid_unnecessary_containers
                                       child: Container(
-                                        color: Colors.red,
+                                        color: Colors.blueAccent,
+                                        width: 300,
                                         child: Column(
                                           children: [
-                                            Text(datasery.cloudcover.toString())
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Time Point : ${datasery.timepoint}    /   Cloud Cover : ${datasery.cloudcover} "
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: height * 0.05,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Seing: ${datasery.seeing}  /  Transparency : ${datasery.seeing}  "
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: height * 0.05,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Lifted Index: ${datasery.liftedIndex}    /   Rh2m : ${datasery.rh2M}  "
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: height * 0.05,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        "Wind 10m: ${datasery.wind10M.direction}    /  Speed: ${datasery.wind10M.direction}  "
+                                                            .toString(),
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            )
                                           ],
                                         ),
                                       ),
@@ -91,26 +164,7 @@ class _HomeState extends State<Home> {
                                       enableInfiniteScroll: false,
                                       //
                                       autoPlay: true),
-                                )
-                                /* SizedBox(
-                                    height: 100,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: weather.map((datasery) {
-                                        return Column(
-                                          children: [
-                                            Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          12)),
-                                              child: Text(datasery.cloudcover
-                                                  .toString()),
-                                            ),
-                                          ],
-                                        );
-                                      }).toList(),
-                                    )), */
+                                ),
                               ],
                             ),
                           );
