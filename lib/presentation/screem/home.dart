@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,6 +48,110 @@ class _HomeState extends State<Home> {
             ),
             child: Column(
               children: [
+                Column(
+                  children: [
+                    // ignore: avoid_unnecessary_containers
+                    Container(
+                      child: BlocConsumer<WeatherBloc, WeatherState>(
+                          listener: (context, weatherState) {
+                        if (weatherState is WeatherSuccesState) {
+                          Text(weatherState.weatherDatasery.first.cloudcover
+                              .toString());
+                          _completer?.complete();
+                          _completer = Completer();
+                        }
+                      }, builder: (context, weatherState) {
+                        if (weatherState is WeatherLoadingState) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        if (weatherState is WeatherSuccesState) {
+                          final weather = weatherState.weatherDatasery;
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                CarouselSlider(
+                                  items: weather.map((datasery) {
+                                    return ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      // ignore: avoid_unnecessary_containers
+                                      child: Container(
+                                        color: Colors.red,
+                                        child: Column(
+                                          children: [
+                                            Text(datasery.cloudcover.toString())
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                      enlargeCenterPage: true,
+                                      enableInfiniteScroll: false,
+                                      //
+                                      autoPlay: true),
+                                )
+                                /* SizedBox(
+                                    height: 100,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: weather.map((datasery) {
+                                        return Column(
+                                          children: [
+                                            Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12)),
+                                              child: Text(datasery.cloudcover
+                                                  .toString()),
+                                            ),
+                                          ],
+                                        );
+                                      }).toList(),
+                                    )), */
+                              ],
+                            ),
+                          );
+                        }
+                        if (weatherState is WeatherStateFailure) {
+                          return const Text(
+                            'Something went wrong',
+                            style: TextStyle(
+                                color: Colors.redAccent, fontSize: 16),
+                          );
+                        }
+                        return Column(
+                          children: [
+                            const Center(
+                                child: Text(
+                              "Get your Current Weather",
+                              style: TextStyle(
+                                  color: Color(0xFF010035),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                            Center(
+                                // ignore: sized_box_for_whitespace
+                                child: Expanded(
+                              // ignore: sized_box_for_whitespace
+                              child: Container(
+                                child: const FlareActor(
+                                  "assets/WorldSpin.flr",
+                                  fit: BoxFit.contain,
+                                  animation: "roll",
+                                ),
+                                height: 200,
+                                width: 200,
+                              ),
+                            )),
+                          ],
+                        );
+                      }),
+                    ),
+                  ],
+                ),
                 Form(
                     key: _formKey,
                     child: Column(
@@ -141,69 +246,6 @@ class _HomeState extends State<Home> {
                 const SizedBox(
                   height: 20,
                 ),
-                Column(
-                  children: [
-                    // ignore: avoid_unnecessary_containers
-                    Container(
-                      child: BlocConsumer<WeatherBloc, WeatherState>(
-                          listener: (context, weatherState) {
-                        if (weatherState is WeatherSuccesState) {
-                          Text(weatherState.weatherDatasery.first.cloudcover
-                              .toString());
-                          _completer?.complete();
-                          _completer = Completer();
-                        }
-                      }, builder: (context, weatherState) {
-                        if (weatherState is WeatherLoadingState) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-                        if (weatherState is WeatherSuccesState) {
-                          final weather = weatherState.weatherDatasery;
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                    height: 100,
-                                    child: ListView(
-                                      scrollDirection: Axis.horizontal,
-                                      children: weather.map((datasery) {
-                                        return Card(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(12)),
-                                          child: Text(
-                                              datasery.cloudcover.toString()),
-                                        );
-                                      }).toList(),
-                                    )),
-                              ],
-                            ),
-                          );
-                        }
-                        if (weatherState is WeatherStateFailure) {
-                          return const Text(
-                            'Something went wrong',
-                            style: TextStyle(
-                                color: Colors.redAccent, fontSize: 16),
-                          );
-                        }
-                        return Center(
-                            // ignore: sized_box_for_whitespace
-                            child: Container(
-                          child: const FlareActor(
-                            "assets/WorldSpin.flr",
-                            fit: BoxFit.contain,
-                            animation: "roll",
-                          ),
-                          height: 300,
-                          width: 300,
-                        ));
-                      }),
-                    ),
-                  ],
-                )
               ],
             ),
           ),

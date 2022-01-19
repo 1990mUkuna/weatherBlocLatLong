@@ -36,18 +36,6 @@ class Datasery extends Equatable {
         precType: precTypeValues.map[json["prec_type"]],
       );
 
-  Map<String, dynamic> toJson() => {
-        "timepoint": timepoint,
-        "cloudcover": cloudcover,
-        "seeing": seeing,
-        "transparency": transparency,
-        "lifted_index": liftedIndex,
-        "rh2m": rh2M,
-        "wind10m": wind10M.toJson(),
-        "temp2m": temp2M,
-        "prec_type": precTypeValues.reverse[precType],
-      };
-
   @override
   // TODO: implement props
   List<Object> get props => [
@@ -80,11 +68,6 @@ class Wind10M {
         direction: json["direction"],
         speed: json["speed"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "direction": direction,
-        "speed": speed,
-      };
 }
 
 class EnumValues<T> {
@@ -94,6 +77,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
+    // ignore: unnecessary_new
     reverseMap ??= map.map((k, v) => new MapEntry(v, k));
     return reverseMap;
   }
