@@ -118,16 +118,33 @@ class _HomeState extends State<Home> {
                             //return a "Completer object"
                             return _completer.future;
                           },
-                          child: Row(
-                            children: [
-                              Text(
-                                weather.first.cloudcover.toString(),
-                                style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.red),
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: 100,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: weather.map((datasery) {
+                                        return Card(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          child: Text(
+                                              datasery.cloudcover.toString()),
+                                        );
+                                      }).toList(),
+                                    )),
+                                Text(
+                                  weather.first.cloudcover.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.red),
+                                ),
+                              ],
+                            ),
                           ));
                     }
                     if (weatherState is WeatherStateFailure) {
